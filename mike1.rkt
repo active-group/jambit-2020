@@ -371,10 +371,13 @@ class Dillo {
 ; - die leere Liste
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^ Selbstbezug
-(define list-of-numbers
-  (signature
-   (mixed empty-list
-          cons-list)))
+; Stream<T>
+(: list-of (signature -> signature))
+(define list-of
+  (lambda (element)
+    (signature
+     (mixed empty-list
+            (cons-list-of element)))))
   
 ; Die leere Liste hat folgende Eigenschaften:
 ; <keine>
@@ -388,11 +391,13 @@ class Dillo {
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list
+(define-record (cons-list-of element) ; cons-list ist damit eine Funktion
   cons
   cons?
-  (first number)
-  (rest list-of-numbers)) ; <- Selbstbezug
+  (first element)
+  (rest (list-of element))) ; <- Selbstbezug
+
+(define list-of-numbers (signature (list-of number)))
 
 (define list0 empty)
 (define list1 (cons 5 empty)) ; 1elementige Liste: 5
@@ -448,8 +453,8 @@ class Dillo {
            (extract-positives (rest list)))))))
 
 
-; Higher-Order-Funktion
-(: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
+; generische Higher-Order-Funktion
+(: extract-list ((%element -> boolean) (list-of %element) -> (list-of %element)))
 
 (check-expect (extract-list even? (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 (cons 6 empty)))))))
               (cons 2 (cons 4 (cons 6 empty))))
