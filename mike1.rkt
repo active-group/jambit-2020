@@ -11,3 +11,23 @@
 
 
 (define circle1 (circle 50 "solid" "red"))
+(define star1 (star 50 "outline" "green"))
+
+(define ov1 (overlay star1 circle1))
+
+(define ov2 (overlay (square 70 "outline" "blue") ov1))
+
+#;(above
+ (beside circle1 star1)
+ (beside star1 circle1))
+
+#;(above
+ (beside ov1 (square 100 "solid" "brown"))
+ (beside (square 100 "solid" "brown") ov1))
+
+
+(define tile
+  (lambda (image1 image2)
+    (above
+     (beside image1 image2)
+     (beside image2 image1))))
