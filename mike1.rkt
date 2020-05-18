@@ -448,12 +448,19 @@ class Dillo {
            (extract-positives (rest list)))))))
 
 
+; Higher-Order-Funktion
 (: extract-list ((number -> boolean) list-of-numbers -> list-of-numbers))
 
 (check-expect (extract-list even? (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 (cons 6 empty)))))))
               (cons 2 (cons 4 (cons 6 empty))))
 (check-expect (extract-list positive? (cons -1 (cons 1 (cons 0 (cons 2 (cons -5 empty))))))
               (cons 1 (cons 2 empty)))
+
+(define dillo-list1 (cons dillo1 (cons dillo2 empty)))
+
+(check-expect (extract-list dillo-alive? dillo-list1)
+              (cons dillo1 empty))
+
 
 (define extract-list
   (lambda (p? list)
