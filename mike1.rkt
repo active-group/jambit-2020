@@ -128,7 +128,8 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
    (combined natural
              (predicate
               (lambda (n)
-                (and (>= n 0)
+                (and (natural? n)
+                     (>= n 0)
                      (<= n 23)))))))
 
 ; Eine Uhrzeit besteht aus/hat folgende Eigenschaften:
