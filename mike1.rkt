@@ -150,4 +150,34 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 (: time-hour (time -> hour))
 (: time-minute (time -> natural))
 
-(make-time 24 15)
+; (make-time 24 15)
+
+
+; Minuten seit Mitternacht
+(: msm (time -> natural))
+
+(check-expect (msm t1) (+ (* 60 11) 17))
+(check-expect (msm t2) 0)
+
+(define msm
+  (lambda (time)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
+
+; Minuten seit Mitternacht wieder zurückkonvertieren
+(: msm->time (natural -> time))
+
+(check-expect (msm->time (+ (* 60 11) 17)) t1)
+(check-expect (msm->time 0) t2)
+
+(define msm->time
+  (lambda (m)
+    (make-time (quotient m 60)
+               (remainder m 60))))
+              
+
+
+
+
+
+
