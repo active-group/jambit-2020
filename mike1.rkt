@@ -69,3 +69,21 @@ x steht für eine Speicherzelle, in der steht 15.
 Inhalt kann durch Zuweisung ausgetauscht werden.
 
 |#
+
+
+; Ein Haustier ist Hund oder eine Katze oder eine Schlange
+
+; Ein Haustier ist eins der folgenden:  <--- Fallunterscheidung
+; - Hund
+; - Katze
+; - Schlange
+; ohne weitere Attribute: Aufzählung, Spezialfall Fallunterscheidung
+(define pet
+  (signature ; immer, wenn eine Signatur definiert wird
+   (enum "Hund" "Katze" "Schlange")))
+
+; Beispiele
+(: pet1 pet)
+(define pet1 "Hund")
+(: pet2 pet)
+(define pet2 "Katze")
