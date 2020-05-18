@@ -25,11 +25,42 @@
  (beside ov1 (square 100 "solid" "brown"))
  (beside (square 100 "solid" "brown") ov1))
 
+; Kurzbeschreibung
+; Zwei Bildern in quadratischem Kachelmuster anordnen
+
+; Signatur
+(: tile (image image -> image))
+
+(check-expect (tile circle1 star1)
+              (above
+               (beside circle1 star1)
+               (beside star1 circle1)))
 
 (define tile
-  (lambda (image1 image2)
+  (lambda (image1 image2) ; <- Parameter
     (above
      (beside image1 image2)
      (beside image2 image1))))
 
-(tile circle1 star1)
+; Variablen werden bei der Auswertung durch ihre Werte ersetzt.
+; Insbesondere: Parameter werden durch ihre Argumente ersetzt
+;(tile circle1 star1)
+
+#|
+
+ o.m(15);
+
+class O {
+  T m(int x) {
+    x
+    x = 10; // Zuweisung
+    x
+  }
+}
+
+x steht *nicht* für den Wert 15
+
+x steht für eine Speicherzelle, in der steht 15.
+Inhalt kann durch Zuweisung ausgetauscht werden.
+
+|#
