@@ -285,10 +285,59 @@ class Dillo {
 (check-expect (run-over-animal parrot1)
               (run-over-parrot parrot1))
 
-(define run-over-animal
+#;(define run-over-animal
   (lambda (animal)
     (cond
       ((dillo? animal)
        (run-over-dillo animal))
       ((parrot? animal)
        (run-over-parrot animal)))))
+
+(define run-over-animal
+  (lambda (animal)
+    (match animal
+      ((make-dillo alive? weight)
+       (make-dillo #f weight))
+      ((make-parrot sentence weight) ; (make-parrot "Hello!" 1) => sentence = "Hello!", weight = 1
+       (make-parrot "" weight)))))
+
+; Ein Fluss kommt entweder aus:
+; - einer Quelle
+; - einem Hauptfluss und einem Nebenfluss
+
+; Ein Fluss ist eins der folgenden:  <- gemischt
+; - ein Bach (aus einer Quelle) 
+; - ein Zusammentreffen von Hauptfluss und einem Nebenfluss
+;                                ^^^^^                ^^^^^
+;                                Selbstbezug
+(define river
+  (signature (mixed creek confluence)))
+
+; Ein Bach hat folgende Eigenschaften:  <- zusammengesetzt
+; - Ursprungsort
+(define-record creek
+  make-creek
+  creek?
+  (creek-origin string))
+
+
+; Ein Zusammentreffen hat folgende Eigenschaften:
+; - Ort
+; - Hauptfluss
+; - Nebenfluss
+(define-record confluence
+  make-confluence
+  confluence?
+  (confluence-location  string)
+  (confluence-main-stem river) ; <- Selstbezug
+  (confluence-tributary river)) ; <- Selbstbezug
+
+(: make-confluence (string river river -> confluence))
+(: confluence? (any -> boolean))
+(: confluence-location (confluence -> string))
+(: confluence-main-stem (confluence -> river))
+(: confluence-tributary (confluence -> river))
+
+
+
+
