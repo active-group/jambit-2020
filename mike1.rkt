@@ -36,6 +36,7 @@
                (beside circle1 star1)
                (beside star1 circle1)))
 
+; Gerüst, Schablone, Rumpf
 (define tile
   (lambda (image1 image2) ; <- Parameter
     (above
