@@ -30,6 +30,7 @@
 
 ; Signatur
 (: tile (image image -> image))
+;^ Signaturdeklaration
 
 (check-expect (tile circle1 star1)
               (above
