@@ -123,13 +123,28 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 
 ; Doku: 2htdp/image
 
+(define hour
+  (signature
+   (predicate
+    (lambda (n)
+      (and (>= n 0)
+           (<= n 23))))))
+
 ; Eine Uhrzeit besteht aus/hat folgende Eigenschaften:
 ; - Stunden
 ; - Minuten
 ; zusammengesetzte Daten
-(define-record time
-  make-time
-  (time-hour natural)
+(define-record time ; Signatur
+  make-time ; Konstruktor
+  (time-hour   natural) ; Selektoren, getter-Funktionen
   (time-minute natural))
 
+(: make-time (natural natural -> time))
+
+(define t1 (make-time 11 17)) ; 11 Uhr 17
+(define t2 (make-time 0 0)) ; Mitternacht
+(define t3 (make-time 17 27)) ; 17 Uhr 27
+
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
 
