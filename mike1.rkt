@@ -415,3 +415,44 @@ class Dillo {
           (list-sum (rest list)) ; die Summe der restlichen Elemente
        )))))
 
+; Gerade Zahlen aus einer Liste extrahieren
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens (cons 1 (cons 2 (cons 3 (cons 4 (cons 5 (cons 6 empty)))))))
+              (cons 2 (cons 4 (cons 6 empty))))
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (even? (first list))
+           (cons (first list) ; das erste Element der Liste
+                 (extract-evens (rest list))) ; die geraden Zahlen aus dem Rest der Liste
+           (extract-evens (rest list)))))))
+
+; Positiven Zahlen aus einer Liste extrahieren
+(: extract-positives (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-positives (cons -1 (cons 1 (cons 0 (cons 2 (cons -5 empty))))))
+              (cons 1 (cons 2 empty)))
+
+(define extract-positives
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (positive? (first list))
+           (cons (first list)
+                 (extract-positives (rest list))) ; die positiven Zahlen aus dem Rest der Liste
+           (extract-positives (rest list)))))))
+
+(define extract-list
+  (lambda (p? list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if (p? (first list))
+           (cons (first list)
+                 (extract-list p? (rest list)))
+           (extract-list p? (rest list)))))))
