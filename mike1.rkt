@@ -125,10 +125,11 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 
 (define hour
   (signature
-   (predicate
-    (lambda (n)
-      (and (>= n 0)
-           (<= n 23))))))
+   (combined natural
+             (predicate
+              (lambda (n)
+                (and (>= n 0)
+                     (<= n 23)))))))
 
 ; Eine Uhrzeit besteht aus/hat folgende Eigenschaften:
 ; - Stunden
@@ -136,15 +137,16 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 ; zusammengesetzte Daten
 (define-record time ; Signatur
   make-time ; Konstruktor
-  (time-hour   natural) ; Selektoren, getter-Funktionen
+  (time-hour   hour) ; Selektoren, getter-Funktionen
   (time-minute natural))
 
-(: make-time (natural natural -> time))
+(: make-time (hour natural -> time))
 
 (define t1 (make-time 11 17)) ; 11 Uhr 17
 (define t2 (make-time 0 0)) ; Mitternacht
 (define t3 (make-time 17 27)) ; 17 Uhr 27
 
-(: time-hour (time -> natural))
+(: time-hour (time -> hour))
 (: time-minute (time -> natural))
 
+(make-time 24 15)
