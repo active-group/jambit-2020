@@ -44,6 +44,9 @@
      (beside image1 image2)
      (beside image2 image1))))
 
+; Signaturverletzung
+; (tile 5 17)
+
 ; Variablen werden bei der Auswertung durch ihre Werte ersetzt.
 ; Insbesondere: Parameter werden durch ihre Argumente ersetzt
 ;(tile circle1 star1)
