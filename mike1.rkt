@@ -122,3 +122,14 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 
 
 ; Doku: 2htdp/image
+
+; Eine Uhrzeit besteht aus/hat folgende Eigenschaften:
+; - Stunden
+; - Minuten
+; zusammengesetzte Daten
+(define-record time
+  make-time
+  (time-hour natural)
+  (time-minute natural))
+
+
