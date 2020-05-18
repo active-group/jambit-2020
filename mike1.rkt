@@ -87,3 +87,24 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 (define pet1 "Hund")
 (: pet2 pet)
 (define pet2 "Katze")
+
+; Ist Haustier niedlich?
+(: cute? (pet -> boolean))
+
+(check-expect (cute? "Hund") #t)
+(check-expect (cute? "Katze") #t)
+(check-expect (cute? "Schlange") #f)
+
+; Gerüst
+#;(define cute?
+  (lambda (pet)
+    ...))
+
+; Schablone <- aus den Signaturen
+(define cute?
+  (lambda (pet)
+    (cond ; Verzweigung, soviele Zweige wie Fälle
+      ; jeder Zweig: Bedingung, Ergebnis
+      ((string=? pet "Hund") #t)
+      ((string=? pet "Katze") #t)
+      ((string=? pet "Schlange") #f))))
