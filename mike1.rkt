@@ -476,3 +476,7 @@ class Dillo {
            (cons (first list)
                  (extract-list p? (rest list)))
            (extract-list p? (rest list)))))))
+
+; Alle Tiere auf dem Highway überfahren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+
