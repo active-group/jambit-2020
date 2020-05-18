@@ -172,12 +172,56 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 
 (define msm->time
   (lambda (m)
-    (make-time (quotient m 60)
-               (remainder m 60))))
-              
+    (define q (quotient m 60))
+    (make-time q
+               (- m (* 60 q)))))
+               
+; Ein Gürteltier hat folgende Eigenschaften:
+; - lebendig oder tot
+; - Gewicht
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight rational))
 
+; "Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt"
+(define dillo1 (make-dillo #t 10)) ; Gürteltier, lebendig, 10kg
+(define dillo2 (make-dillo #f 12)) ; Gürteltier, tot, 12kg
 
+; Gürteltier überfahren
 
+#|
+class Dillo {
+   bool isAlive;
 
+   void runOver() {
+     this.isAlive = false;
+   }
+|#
+
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
+
+; Kopie liefern mit anderem alive?-Feld
+; "funktionaler Update"
+(: dillo-with-alive? (dillo boolean -> dillo))
+
+(check-expect (dillo-with-alive? dillo2 #t)
+              (make-dillo #t 12))
+
+(define dillo-with-alive?
+  (lambda (dillo alive?)
+    (make-dillo alive? (dillo-weight dillo))))
+    
+    
+    
 
 
