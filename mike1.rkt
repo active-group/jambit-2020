@@ -181,8 +181,11 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 ; - Gewicht
 (define-record dillo
   make-dillo
+  dillo?
   (dillo-alive? boolean)
   (dillo-weight rational))
+
+(: dillo? (any -> boolean)) ; Prädikat
 
 ; "Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt"
 (define dillo1 (make-dillo #t 10)) ; Gürteltier, lebendig, 10kg
@@ -245,9 +248,11 @@ class Dillo {
 ; - Gewicht
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight rational))
 
+(: parrot? (any -> boolean))
 
 (define parrot1 (make-parrot "Hello!" 1))
 (define parrot2 (make-parrot "Good bye!" 1.5))
@@ -275,9 +280,14 @@ class Dillo {
 ; Tier überfahren
 (: run-over-animal (animal -> animal))
 
-(check-expect (run-over-animal dillo1)
+#;(check-expect (run-over-animal dillo1)
               (run-over-dillo dillo1))
-(check-expect (run-over-animal parrot1)
-              (run-over-dillo parrot1))
+#;(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
 
-
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...)
+      )))
