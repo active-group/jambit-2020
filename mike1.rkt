@@ -338,6 +338,80 @@ class Dillo {
 (: confluence-main-stem (confluence -> river))
 (: confluence-tributary (confluence -> river))
 
+(define eschach (make-creek "Heimliswald"))
+(define prim (make-creek "Dreifaltigkeitsberg"))
+(define neckar-1 (make-confluence "Rottweil" eschach prim))
+(define schlichem (make-creek "Tieringen"))
+(define neckar-2 (make-confluence "Epfendorf" neckar-1 schlichem))
 
+; Fließt Wasser von einem bestimmten Ort in Fluss?
+(: flows-from? (string river -> boolean))
 
+(check-expect (flows-from? "Heimliswald" eschach) #t)
+(check-expect (flows-from? "Heimliswald" neckar-2) #t)
+(check-expect (flows-from? "Tieringen" eschach) #f)
+
+(define flows-from?
+  (lambda (location river)
+    (cond
+      ((creek? river)
+       (string=? location (creek-origin river)))
+      ((confluence? river)
+       (if (string=? location (confluence-location river))
+           #t
+           (or
+            ; Fließt Wasser aus location in den Hauptfluss von river?
+            (flows-from? location (confluence-main-stem river))
+            ; Fließt Wasser aus location in den Nebenfluss von river?
+            (flows-from? location (confluence-tributary river))))))))
+
+; Repräsentation von endlichen Folgen:
+
+; Eine Liste ist eins der folgenden:
+; - die leere Liste
+; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
+;                                                         ^^^^^ Selbstbezug
+(define list-of-numbers
+  (signature
+   (mixed empty-list
+          cons-list)))
+  
+; Die leere Liste hat folgende Eigenschaften:
+; <keine>
+(define-record empty-list
+  make-empty
+  empty?)
+
+; Es gibt nur eine leere Liste
+(define empty (make-empty))
+
+; Eine Cons-Liste besteht aus:
+; - erstes Element
+; - Rest-Liste
+(define-record cons-list
+  cons
+  cons?
+  (first number)
+  (rest list-of-numbers)) ; <- Selbstbezug
+
+(define list0 empty)
+(define list1 (cons 5 empty)) ; 1elementige Liste: 5
+(define list2 (cons 7 (cons 5 empty))) ; 2elementig: 7 5
+(define list3 (cons 2 (cons 7 (cons 5 empty)))) ; 3elementig: 2 7 5
+(define list4 (cons 3 list3)) ; 4elementig: 3 2 7 5
+
+; Elemente einer Liste summieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list2) 12)
+(check-expect (list-sum list4) 17)
+
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; "das neutrale Element"
+      ((cons? list)
+       (+ (first list) ; das erste Element
+          (list-sum (rest list)) ; die Summe der restlichen Elemente
+       )))))
 
