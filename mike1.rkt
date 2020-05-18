@@ -264,3 +264,20 @@ class Dillo {
   (lambda (parrot)
     (make-parrot "" (parrot-weight parrot))))
 
+; Ein Tier ist eins der folgenden:
+; - ein Gürteltier
+; - ein Papagei
+; Fallunterscheidung: jeder Fall hat eine Signatur
+; gemischte Daten
+(define animal
+  (signature (mixed dillo parrot)))
+
+; Tier überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal parrot1)
+              (run-over-dillo parrot1))
+
+
