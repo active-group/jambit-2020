@@ -108,3 +108,16 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
       ((string=? pet "Hund") #t)
       ((string=? pet "Katze") #t)
       ((string=? pet "Schlange") #f))))
+
+; Ein Bildformat ist eins der folgenden:
+; - hochkant
+; - quer
+; - quadratisch
+; <Stück Code>
+
+; Für ein Bild das Bildformat ermitteln
+; dafür:
+; (: image-width (image -> natural))
+; (: image-height (image -> natural))
+
+
