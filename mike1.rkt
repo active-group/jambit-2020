@@ -121,3 +121,4 @@ Inhalt kann durch Zuweisung ausgetauscht werden.
 ; (: image-height (image -> natural))
 
 
+; Doku: 2htdp/image
