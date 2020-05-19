@@ -506,6 +506,17 @@ class Dillo {
 ; Funktion auf alle Listenelemente anwenden
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
+(define inc (lambda (x) (+ x 1)))
+
+(check-expect (list-map inc
+                        (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 (cons 3 (cons 4 empty))))
+(check-expect (list-map (lambda (x) (+ x 1))
+                        (cons 1 (cons 2 (cons 3 empty))))
+              (cons 2 (cons 3 (cons 4 empty))))
+              
+                        
+ 
 (define list-map
   (lambda (f list)
     (cond
