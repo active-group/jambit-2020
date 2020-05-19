@@ -28,6 +28,7 @@
     (cond
       ((empty? list) acc)
       ((cons? list)
+       ; kein Kontext: benötigt keinen Platz für rekursiven Aufruf
        (rev* (rest list) (cons (first list) acc))))))
 
 ; 1. Aufruf von cons-to-end: leere Liste
@@ -49,5 +50,6 @@
     (cond
      ((empty? list) (cons element empty))
      ((cons? list)
+      ; verbraucht Speicherplatz pro rekursivem Aufruf: z.B. Stack
       (cons (first list) ; Kontext: zu tun nach dem rekursiven Aufruf
             (cons-to-end (rest list) element))))))
