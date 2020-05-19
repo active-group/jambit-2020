@@ -574,12 +574,19 @@ class Dillo {
           (cons (make-tuple2 (first list1) (first list2))
                 (zip (rest list1) (rest list2)))))))))
 
+; Wenn in diesen Sprachen (auch in Java/C++/JavaScript/Kotlin/Scala)
+; eine Funktion aufgerufen wird, werden zunächst die Argumente berechnet.
+; (: if (boolean %a %a -> %a))
+; ^^^ Deswegen keine Funktion
+
+; *nicht* so in Haskell
+
 ; Tiere füttern
 (: feed-animals ((list-of animal) (list-of weight) -> (list-of animal)))
 
 (define feed-animals
   (lambda (animals weights)
-    (feed-animals*  ...)))
+    (feed-animals*  (zip animals weights))))
     
 (: feed-animals* ((list-of (tuple2-of animal weight)) -> (list-of animal)))
 
