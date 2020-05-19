@@ -29,7 +29,11 @@
       ((empty? list) acc)
       ((cons? list)
        ; kein Kontext: benötigt keinen Platz für rekursiven Aufruf
+       ; tail call, endrekursiver Aufruf
        (rev* (rest list) (cons (first list) acc))))))
+
+; JVM: Methodenaufruf benötigt *immer* Stackplatz
+;      Stack hat (sehr) begrenzte Größe - typischerweise für ~10.000 Aufrufe
 
 ; 1. Aufruf von cons-to-end: leere Liste
 ; 2. Aufruf von cons-to-end: 1elementige Liste
