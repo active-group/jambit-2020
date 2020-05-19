@@ -379,7 +379,12 @@ class Dillo {
      (mixed empty-list
             (cons-list-of element)))))
 
+
 ; (make-empty) -> empty
+#;(match list
+    (empty ...)
+    ((cons first rest)
+     ...))
 
 ; Die leere Liste hat folgende Eigenschaften:
 ; <keine>
