@@ -32,6 +32,27 @@
        ; tail call, endrekursiver Aufruf
        (rev* (rest list) (cons (first list) acc))))))
 
+; map, nur endrekursiv
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(check-expect (list-map (lambda (x) (+ x 1))
+                        (list 1 2 3))
+              (list 2 3 4))
+
+(define list-map
+  (lambda (f list0)
+    (rev (list-map* f list0 empty))))
+
+; acc: enthält die Liste der Funktionsergebnisse von den Elementen in list0 vor list
+; ... von den Elementen, welche die Funktion schon gesehen                                                      
+               
+(define list-map*
+  (lambda (f list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (list-map* f (rest list) (cons (f (first list)) acc))))))
+
 ; JVM: Methodenaufruf benötigt *immer* Stackplatz
 ;      Stack hat (sehr) begrenzte Größe - typischerweise für ~10.000 Aufrufe
 
