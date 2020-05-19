@@ -441,6 +441,31 @@ class Dillo {
        (* (first list)
           (list-product (rest list)))))))
 
+; "fold"
+(: list-operation (%b (%a %b -> %b) (list-of %a) -> %b))
+
+(check-expect (list-operation 0 + (list 1 2 3 4 5))
+              15)
+(check-expect (list-operation 1 * (list 1 2 3 4 5))
+              120)
+
+; Schablone:
+#;(define f
+    (lambda (list)
+      (cond
+        ((empty? list) ...)
+        ((cons? list)
+         ... (first list)
+         ... (f (rest list))))))
+    
+(define list-operation
+  (lambda (for-empty for-cons list)
+    (cond
+      ((empty? list) for-empty)
+      ((cons? list)
+       (for-cons (first list)
+                 (list-operation for-empty for-cons (rest list)))))))
+
 ; Gerade Zahlen aus einer Liste extrahieren
 (: extract-evens (list-of-numbers -> list-of-numbers))
 
@@ -523,6 +548,14 @@ class Dillo {
        (cons (run-over-animal (first list))
              (run-over-animals (rest list)) ; die restlichen Tiere, schon überfahren
        )))))
+
+(define run-over-animals*
+  (lambda (list)
+    (list-operation empty
+                    (lambda (first-of-list result-of-recursive-call)
+                      (cons (run-over-animal first-of-list)
+                            result-of-recursive-call))
+                    list)))
 
 ; Funktion auf alle Listenelemente anwenden
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
