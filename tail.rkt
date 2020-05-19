@@ -7,7 +7,7 @@
 (check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
-(define rev-q
+(define rev-q ; quadratisch
   (lambda (list)
     (cond
       ((empty? list) empty)
@@ -21,7 +21,9 @@
   (lambda (list)
     (rev* list empty)))
 
-(define rev*
+(: rev* ((list-of %a) (list-of %a) -> (list-of %a)))
+
+(define rev* ; linear
   (lambda (list acc)
     (cond
       ((empty? list) acc)
@@ -47,5 +49,5 @@
     (cond
      ((empty? list) (cons element empty))
      ((cons? list)
-      (cons (first list)
+      (cons (first list) ; Kontext: zu tun nach dem rekursiven Aufruf
             (cons-to-end (rest list) element))))))
