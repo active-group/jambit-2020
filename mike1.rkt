@@ -533,7 +533,7 @@ class Dillo {
        )))))
 
 
-; Tiere auf dem Highway füttern mit list-map:
+; Tiere auf dem Highway füttern mit list-map
 
 (check-expect (list-map (lambda (dillo)
                           ; feed-dillo auf 2 spezialisiert
@@ -544,7 +544,36 @@ class Dillo {
 
 (check-expect (list-map (lambda (x) (+ 1 x)) ; + auf 1 spezialisiert
                         (list 1 2 3))
-              (list 2 3 4))                        
+              (list 2 3 4))
+
+; (lambda (dillo) (feed-dillo 2 dillo))
+; (lambda (x)     (+          1 x))
+
+; Funktion spezialisieren
+(: specialize ((%a %b -> %c) %a -> (%b -> %c)))
+;              f             a      b      (f a b)
+(check-expect (list-map (specialize + 1)
+                        (list 1 2 3))
+              (list 2 3 4))
+
+(define specialize
+  (lambda (f a)
+    (lambda (b)
+      (f a b))))
+
+; OCaml, Haskell, F#: nur 1stellige Funktionen
+; %a -> %b
+
+(: curry ((%a %b -> %c) -> (%a -> (%b -> %c))))
+
+(define curry
+  (lambda (f)
+    (lambda (a)
+      (lambda (b)
+        (f a b)))))
+
+(define make-feed-dillo
+  (curry feed-dillo))
 
 ; Ein 2-Tupel besteht aus:
 ; - Teil 1
