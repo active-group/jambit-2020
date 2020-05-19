@@ -32,6 +32,8 @@
        ; tail call, endrekursiver Aufruf
        (rev* (rest list) (cons (first list) acc))))))
 
+; Schleifeninvariante
+
 ; map, nur endrekursiv
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
