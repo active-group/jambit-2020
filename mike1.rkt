@@ -564,6 +564,7 @@ class Dillo {
 ; OCaml, Haskell, F#: nur 1stellige Funktionen
 ; %a -> %b
 
+; Funktion schönfinkeln
 (: curry ((%a %b -> %c) -> (%a -> (%b -> %c))))
 
 (define curry
@@ -572,8 +573,23 @@ class Dillo {
       (lambda (b)
         (f a b)))))
 
+; Funktion entschönfinkeln
+(: uncurry ((%a -> (%b -> %c)) -> (%a %b -> %c)))
+
+
 (define make-feed-dillo
   (curry feed-dillo))
+
+; Argumente 2stelliger Funktion vertauschen
+(: flip ((%a %b -> %c) -> (%b %a -> %c)))
+
+(check-expect ((flip make-tuple2) 1 2)
+              (make-tuple2 2 1))
+
+(define flip
+  (lambda (f)
+    (lambda (b a)
+      (f a b))))
 
 ; Ein 2-Tupel besteht aus:
 ; - Teil 1
