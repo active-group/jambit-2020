@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname mike1) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
+#reader(lib "vanilla-reader.rkt" "deinprogramm" "sdp")((modname mike1) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
 ; Schulung funktionale Programmierung
 
 (define mike "sperber")
@@ -372,8 +372,8 @@ class Dillo {
 ; - eine Cons-Liste bestehend aus erstem Element und Rest-Liste
 ;                                                         ^^^^^ Selbstbezug
 ; Stream<T>
-(: list-of (signature -> signature))
-(define list-of
+#;(: list-of (signature -> signature))
+#;(define list-of
   (lambda (element)
     (signature
      (mixed empty-list
@@ -381,17 +381,17 @@ class Dillo {
   
 ; Die leere Liste hat folgende Eigenschaften:
 ; <keine>
-(define-record empty-list
+#;(define-record empty-list
   make-empty
   empty?)
 
 ; Es gibt nur eine leere Liste
-(define empty (make-empty))
+#;(define empty (make-empty))
 
 ; Eine Cons-Liste besteht aus:
 ; - erstes Element
 ; - Rest-Liste
-(define-record (cons-list-of element) ; cons-list ist damit eine Funktion
+#;(define-record (cons-list-of element) ; cons-list ist damit eine Funktion
   cons
   cons?
   (first element)
