@@ -514,10 +514,8 @@ class Dillo {
                         (cons 1 (cons 2 (cons 3 empty))))
               (cons 2 (cons 3 (cons 4 empty))))
 (check-expect (list-map (lambda (x) (+ x 1))
-                        (cons 1 (cons 2 (cons 3 empty))))
-              (cons 2 (cons 3 (cons 4 empty))))
-              
-                        
+                        (list 1 2 3))
+              (list 2 3 4))                        
  
 (define list-map
   (lambda (f list)
