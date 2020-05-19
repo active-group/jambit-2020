@@ -421,11 +421,25 @@ class Dillo {
 (define list-sum
   (lambda (list)
     (cond
-      ((empty? list) 0) ; "das neutrale Element"
+      ((empty? list) 0) ; "das neutrale Element bezüglich +"
       ((cons? list)
        (+ (first list) ; das erste Element
           (list-sum (rest list)) ; die Summe der restlichen Elemente
        )))))
+
+; Elemente einer Liste multiplizieren
+(: list-product ((list-of number) -> number))
+
+(check-expect (list-product list4)
+              210)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; "das neutrale Element bezüglich *"
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
 
 ; Gerade Zahlen aus einer Liste extrahieren
 (: extract-evens (list-of-numbers -> list-of-numbers))
