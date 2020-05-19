@@ -536,10 +536,15 @@ class Dillo {
 ; Tiere auf dem Highway füttern mit list-map:
 
 (check-expect (list-map (lambda (dillo)
+                          ; feed-dillo auf 2 spezialisiert
                           (feed-dillo 2 dillo))
                         (list dillo1 dillo2))
               (list (feed-dillo 2 dillo1)
                     (feed-dillo 2 dillo2)))
+
+(check-expect (list-map (lambda (x) (+ 1 x)) ; + auf 1 spezialisiert
+                        (list 1 2 3))
+              (list 2 3 4))                        
 
 ; Ein 2-Tupel besteht aus:
 ; - Teil 1
