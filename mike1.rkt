@@ -378,7 +378,9 @@ class Dillo {
     (signature
      (mixed empty-list
             (cons-list-of element)))))
-  
+
+; (make-empty) -> empty
+
 ; Die leere Liste hat folgende Eigenschaften:
 ; <keine>
 #;(define-record empty-list
