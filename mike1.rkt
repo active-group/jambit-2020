@@ -466,6 +466,41 @@ class Dillo {
        (for-cons (first list)
                  (list-operation for-empty for-cons (rest list)))))))
 
+
+(define list-length*
+  (lambda (list)
+    (list-operation 0 (lambda (first-of-list rest-length)
+                        (+ 1 rest-length))
+                    list)))
+
+(define list-length**
+  (lambda (list)
+    (list-operation 0 +
+                    (list-map (lambda (x) 1) list))))
+
+(define list-length***
+  (lambda (list)
+    (list-operation 0 +
+                    (list-map (const 1) list))))
+
+(define list-length****
+  (lambda (list)
+    (list-operation 0
+                    (uncurry
+                     (const
+                      ((curry +) 1))) ; inc
+                    list)))
+
+; Funktion erzeugen, die ihr Argument ignoriert
+(: const (%a -> (any -> %a)))
+
+(define const
+  (lambda (x)
+    (lambda (ignore)
+      x)))
+
+    
+
 ; Gerade Zahlen aus einer Liste extrahieren
 (: extract-evens (list-of-numbers -> list-of-numbers))
 
