@@ -535,3 +535,53 @@ class Dillo {
 
 ; Tiere auf dem Highway füttern mit list-map:
 
+(check-expect (list-map (lambda (dillo)
+                          (feed-dillo 2 dillo))
+                        (list dillo1 dillo2))
+              (list (feed-dillo 2 dillo1)
+                    (feed-dillo 2 dillo2)))
+
+; Ein 2-Tupel besteht aus:
+; - Teil 1
+; - Teil 2
+(define-record (tuple2-of a b)
+  make-tuple2
+  tuple2?
+  (tuple2-1 a)
+  (tuple2-2 b))
+
+
+
+(define weight (signature rational))
+
+(: feed-animal (animal weight -> animal))
+
+(define feed-animal
+  (lambda (animal amount)
+    (feed-dillo amount animal))) ; GEMOGELT!
+
+; Aus 2 Listen eine Liste aus 2-Tupeln machen
+(: zip ((list-of %a) (list-of %b) -> (list-of (tuple2-of %a %b))))
+
+
+
+
+; Tiere füttern
+(: feed-animals ((list-of animal) (list-of weight) -> (list-of animal)))
+
+(define feed-animals
+  (lambda (animals weights)
+    (feed-animals*  ...)))
+    
+(: feed-animals* ((list-of (tuple2-of animal weight)) -> (list-of animal)))
+
+(check-expect (feed-animals* (list (make-tuple2 dillo1 3)
+                                   (make-tuple2 dillo2 5)))
+              (list (feed-animal dillo1 3)
+                    (feed-animal dillo2 5)))
+
+(define feed-animals*
+  (lambda (tuples)
+    (list-map (lambda (tuple)
+                (feed-animal (tuple2-1 tuple) (tuple2-2 tuple)))
+              tuples)))
