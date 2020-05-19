@@ -477,6 +477,43 @@ class Dillo {
                  (extract-list p? (rest list)))
            (extract-list p? (rest list)))))))
 
-; Alle Tiere auf dem Highway überfahren
+; Liste aller überfahrenen Tiere liefern
 (: run-over-animals ((list-of animal) -> (list-of animal)))
+
+(check-expect (run-over-animals
+               (cons dillo1
+                     (cons parrot1
+                           empty)))
+              (cons (run-over-animal dillo1)
+                    (cons (run-over-animal parrot1)
+                          empty)))
+
+#|
+   for (Animal animal : list) {
+     ...
+   }
+|#
+(define run-over-animals
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       ; Reihenfolge wurst
+       (cons (run-over-animal (first list))
+             (run-over-animals (rest list)) ; die restlichen Tiere, schon überfahren
+       )))))
+
+; Funktion auf alle Listenelemente anwenden
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(define list-map
+  (lambda (f list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       ; Reihenfolge wurst
+       (cons (f (first list))
+             (list-map f (rest list))
+       )))))
+
 
