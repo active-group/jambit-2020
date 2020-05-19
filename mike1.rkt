@@ -576,6 +576,16 @@ class Dillo {
 ; Funktion entschönfinkeln
 (: uncurry ((%a -> (%b -> %c)) -> (%a %b -> %c)))
 
+(check-expect ((uncurry (curry +)) 3 4)
+              7)
+
+(define uncurry
+  (lambda (f)
+    (lambda (a b)
+      ; ((f a) b)
+      (define fa (f a)) ; (%b -> %c)
+      (fa b))))
+      
 
 (define make-feed-dillo
   (curry feed-dillo))
