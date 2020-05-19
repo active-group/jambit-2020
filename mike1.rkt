@@ -516,7 +516,7 @@ class Dillo {
 (check-expect (list-map (lambda (x) (+ x 1))
                         (list 1 2 3))
               (list 2 3 4))                        
- 
+
 (define list-map
   (lambda (f list)
     (cond
@@ -527,4 +527,6 @@ class Dillo {
              (list-map f (rest list))
        )))))
 
+
+; Tiere auf dem Highway füttern mit list-map:
 
