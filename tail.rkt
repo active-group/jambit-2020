@@ -33,6 +33,7 @@
        (rev* (rest list) (cons (first list) acc))))))
 
 ; Schleifeninvariante
+; loop invariant
 
 ; map, nur endrekursiv
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
