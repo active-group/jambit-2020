@@ -7,15 +7,34 @@
 (check-expect (rev (list 1 2 3))
               (list 3 2 1))
 
-(define rev
+(define rev-q
   (lambda (list)
     (cond
       ((empty? list) empty)
       ((cons? list)
        (cons-to-end 
-        (rev (rest list)) ; 3 2
+        (rev-q (rest list)) ; 3 2
         (first list) ; 1
    )))))
+
+(define rev
+  (lambda (list)
+    (rev* list empty)))
+
+(define rev*
+  (lambda (list acc)
+    (cond
+      ((empty? list) acc)
+      ((cons? list)
+       (rev* (rest list) (cons (first list) acc))))))
+
+; 1. Aufruf von cons-to-end: leere Liste
+; 2. Aufruf von cons-to-end: 1elementige Liste
+; 3. Aufruf                : 2elementige Listen
+; Funktionsaufrufe für n-elementige Liste:
+; 1 + 2 + 3 + 4 + ... + n
+; Gaußsche Summenformel: (n / 2) * (n + 1)
+; = (n^2 + n) / 2 = O(n^2)
 
 ; Element hinten anhängen
 (: cons-to-end ((list-of %a) %a -> (list-of %a)))
