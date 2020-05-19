@@ -563,8 +563,16 @@ class Dillo {
 ; Aus 2 Listen eine Liste aus 2-Tupeln machen
 (: zip ((list-of %a) (list-of %b) -> (list-of (tuple2-of %a %b))))
 
-
-
+(define zip
+  (lambda (list1 list2)
+    (cond
+      ((empty? list1) empty)
+      ((cons? list1)
+       (cond
+         ((empty? list2) empty)
+         ((cons? list2)
+          (cons (make-tuple2 (first list1) (first list2))
+                (zip (rest list1) (rest list2)))))))))
 
 ; Tiere füttern
 (: feed-animals ((list-of animal) (list-of weight) -> (list-of animal)))
