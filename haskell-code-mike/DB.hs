@@ -105,5 +105,12 @@ runDB db (Done result) = result
 
 -- runSQLiteDB :: DB result -> IO result
 
+type ErrorMessage = String
+divideBy :: Integer -> Integer -> Either ErrorMessage Integer
+divideBy a 0 = Left "division by zero"
+divideBy a n = Right (quot a n)
+
+
+
 -- Haskell-Programm
 -- main :: IO ()
