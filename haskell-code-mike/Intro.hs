@@ -82,6 +82,10 @@ parrot2 = Parrot "Goodbye!" 2
 
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
+runOverAnimal dillo@(Dillo Dead weight) = dillo -- Alias-Pattern, redundant
 runOverAnimal (Dillo liveness w) = Dillo Dead w
-runOverAnimal (Parrot "Good morning!" weight) =
+-- runOverAnimal (Parrot "Good morning!" weight) =
+runOverAnimal (Parrot _ weight) =
   Parrot "" weight
+
+-- Tier füttern
