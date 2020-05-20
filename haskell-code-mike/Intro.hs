@@ -262,7 +262,9 @@ class Semigroup t where
 o3 :: Semigroup t => t -> t -> t -> t
 o3 x y z = x `o` y `o` z
 
+
 data AddInteger = AddInteger Integer
+--   ^^^ Typ      ^^^ Konstruktor
 
 instance Semigroup AddInteger where
   o (AddInteger x) (AddInteger y) = AddInteger (x + y)
