@@ -102,3 +102,8 @@ runDB db (Put key value cont) =
     let db' = Map.insert key value db
     in runDB db' (cont ())
 runDB db (Done result) = result
+
+-- runSQLiteDB :: DB result -> IO result
+
+-- Haskell-Programm
+-- main :: IO ()
