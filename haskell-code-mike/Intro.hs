@@ -119,16 +119,18 @@ curryA =
     \ a ->
       \ b ->
         f (a, b)
-–}
-curryA =
-  \ f ->
-    \ a ->
-      \ b ->
-        f (a, b)
-
+-}
+curryA f a b = f (a, b)
 
 uncurryA :: (a -> (b -> c)) -> ((a, b) -> c)
+{-
 uncurryA =
   \f ->
     \ (a, b) ->
-      (f a) b
+      f a b
+-}
+uncurryA f (a, b) = f a b
+
+flipA :: (a -> b -> c) -> (b -> a -> c)
+flipA f a b = f b a
+
