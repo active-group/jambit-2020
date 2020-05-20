@@ -110,6 +110,7 @@ divideBy :: Integer -> Integer -> Either ErrorMessage Integer
 divideBy a 0 = Left "division by zero"
 divideBy a n = Right (quot a n)
 
+divideProgram :: Integer -> Integer -> Either ErrorMessage (Integer, Integer)
 divideProgram a b =
     do x <- divideBy a b 
        y <- divideBy b a
