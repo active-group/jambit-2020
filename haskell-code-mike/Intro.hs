@@ -134,3 +134,15 @@ uncurryA f (a, b) = f a b
 flipA :: (a -> b -> c) -> (b -> a -> c)
 flipA f a b = f b a
 
+flipT :: ((a, b) -> c) -> ((b, a) -> c)
+-- flipT f (a, b) = f (b, a)
+-- flipT f = uncurryA (flipA (curryA f))
+flipT = uncurryA . flipA . curryA
+
+-- (.) :: (b -> c) -> (a -> b) -> (a -> c)
+
+
+
+
+
+
