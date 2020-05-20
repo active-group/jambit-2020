@@ -150,8 +150,19 @@ data IntList =
     EmptyIntList
   | ConsIntList Integer IntList
 
+list0 :: [a]
+list0 = [] -- leere Liste
+list1 :: [Integer]
+list1 = 1:[] -- : = cons
+list1' :: [Integer]
+list1' = [1] -- gleiche Liste
+list2 :: [Integer]
+list2 = [1, 2]
 
-
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) =
+  first + (listSum rest)
 
 
 
