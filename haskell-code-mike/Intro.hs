@@ -173,4 +173,6 @@ listSum [] = 0
 -- first -> head, rest -> tail
 listSum (x:xs) = x + listSum xs
 
+listMap :: 
+
 
