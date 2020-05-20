@@ -73,8 +73,15 @@ splice (Put key value cont) after =
                  splice (cont ()) after)
 splice (Done result) after = after result
 
--- instance Monad DB where
---   (>>=) = splice
+instance Functor DB where
+  -- dummy
+
+instance Applicative DB where
+  -- dummy
+
+instance Monad DB where
+  (>>=) = splice -- "bind"
+  return = Done
 
 -- "dependency injection"
 
