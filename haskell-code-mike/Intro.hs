@@ -301,3 +301,15 @@ data Map key value = Map [(key, value)]
 
 map1 :: Map String Integer
 map1 = Map [("Mike", 5), ("Sperber", 15)]
+
+data Optional result =
+    NotThere
+  | There result
+
+-- Eintrag in Map nachschauen
+mapLookup :: Eq key => key -> Map key value -> Optional value
+mapLookup key (Map []) = NotThere
+mapLookup key (Map ((key', value'):rest)) = 
+  if key == key'
+  then There value'
+  else mapLookup key (Map rest)
