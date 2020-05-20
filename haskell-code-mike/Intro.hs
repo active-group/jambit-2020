@@ -169,8 +169,8 @@ list2 = [1, 2]
 
 listSum :: [Integer] -> Integer
 listSum [] = 0
-listSum (first:rest) =
-  first + (listSum rest)
-
+-- listSum (first:rest) = first + (listSum rest)
+-- first -> head, rest -> tail
+listSum (x:xs) = x + listSum xs
 
 
