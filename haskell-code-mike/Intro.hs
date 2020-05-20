@@ -1,5 +1,7 @@
 module Intro where
 
+import Prelude hiding (Semigroup, Monoid)
+
 x :: Integer
 x = 5 + 7
 
@@ -238,4 +240,14 @@ sieve (first:rest) =
 -- x `o` n = n `o` x = x -- Infix-Notation
 -- x + 0 = 0 + x = x
 
-class Semigroup
+-- Es gibt auch noch:
+-- - Kommutativgesetz
+-- - Distributivgesetz
+
+class Semigroup t where
+  -- es gilt das Assoziativgesetz
+  -- o (o x y) z = o x (o y z)
+  o :: t -> t -> t 
+
+instance Semigroup Integer where
+  o x y = x + y
