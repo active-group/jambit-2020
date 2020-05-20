@@ -182,6 +182,23 @@ listMap f (x:xs) =
   cons (f x) (listMap f xs)
 
 -- lazy evalation
--- Ausdrücke werden nur soweit ausgwertet, wie nötig
+-- nicht-strike Auswertung
+-- Ausdrücke werden nur soweit ausgewertet, wie nötig
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n + 1)
+
+-- Sieb des Eratosthenes
+
+-- ist Zahl Vielfacher einer anderen Zahl?
+isMultiple :: Integer -> Integer -> Bool
+isMultiple n d = rem n d == 0
+
+-- Vielfache einer Zahl aus einer Liste streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+strikeMultiples n [] = []
+strikeMultiples n (first:rest) =
+  if isMultiple first n
+  then strikeMultiples n rest
+  else first : (strikeMultiples n rest)
+
+
