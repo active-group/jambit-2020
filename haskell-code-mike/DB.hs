@@ -42,11 +42,41 @@ data Maybe a =
 
 p1 :: DB (Maybe Integer)
 p1 = Put "Mike" 15 (\() ->
-     Get "Mike" (\ x ->
-     Put "Mike" (x + 1) (\() ->
-     if x >= 15
-     then Done (Just x)
-     else Done Nothing)))
+      Get "Mike" (\ x ->
+       Put "Mike" (x + 1) (\() ->
+        if x >= 15
+        then Done (Just x)
+        else Done Nothing)))
+
+put :: String -> Integer -> DB ()
+put key value = Put key value Done -- (\() -> Done ())
+
+get :: String -> DB Integer
+get key = Get key Done -- (\ result -> Done result)
+
+-- p1' = put "Mike" 15 -- endet auf Done, hätten gern get "Mike"
+
+p1' = put "Mike" 15 `splice` (\ () ->
+      get "Mike" `splice` (\ x ->
+      put "Mike" (x + 1) `splice` (\ () ->
+      Done x)))
+
+-- Zwei DB-Programme hintereinander schalten
+splice :: DB a -> (a -> DB b) -> DB b
+--                after
+splice (Get key cont) after =
+  Get key (\ value ->
+           -- cont value :: DB a
+           splice (cont value) after)
+splice (Put key value cont) after = 
+  Put key value (\ () ->
+                 splice (cont ()) after)
+splice (Done result) after = after result
+
+instance Monad DB where
+  (>>=) = splice
+
+-- "dependency injection"
 
 -- Datenbankprogramm ausführen
 runDB :: Map String Integer -> DB result -> result
