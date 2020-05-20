@@ -93,6 +93,23 @@ feedAnimal :: Integer -> (Animal -> Animal)
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
+-- Tupel
 feedAnimal' :: (Integer, Animal) -> Animal
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+
+{-
+(define curry
+  (lambda (f)
+    (lambda (a)
+      (lambda (b)
+        (f a b)))))
+-}
+
+-- a, b, c: Typvariablen - klein geschrieben
+curryA :: ((a, b) -> c) -> (a -> (b -> c))
+curryA =
+  \ f ->
+    \ a ->
+      \ b ->
+        f (a, b)
