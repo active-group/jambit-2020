@@ -32,4 +32,11 @@ waterState = \ temp ->
 
 -- Ein Haustier ...
 data Pet = Hund | Katze | Schlange
-  deriving Show
+ deriving Show -- einrückungssensibel
+
+-- Ist Haustier niedlich?
+isCute :: Pet -> Bool
+
+isCute Hund = True
+isCute Katze = True
+isCute Schlange = False
