@@ -92,3 +92,7 @@ runOverAnimal (Parrot _ weight) =
 feedAnimal :: Integer -> (Animal -> Animal)
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
+
+feedAnimal' :: (Integer, Animal) -> Animal
+feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
+feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
