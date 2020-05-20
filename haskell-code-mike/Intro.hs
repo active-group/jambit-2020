@@ -265,6 +265,9 @@ o3 x y z = x `o` y `o` z
 instance Semigroup Integer where
   o x y = x + y
 
+instance Semigroup Integer where
+  o x y = x * y
+
 instance Semigroup Bool where
   o x y = x && y
 
