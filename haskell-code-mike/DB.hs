@@ -48,4 +48,12 @@ p1 = Put "Mike" 15 (\() ->
      then Done (Just x)
      else Done Nothing)))
 
+-- Datenbankprogramm ausführen
 runDB :: Map String Integer -> DB result -> result
+runDB db (Get key cont) =
+    let Just value = Map.lookup key db
+    in runDB db (cont value)
+runDB db (Put key value cont) =
+    let db' = Map.insert key value db
+    in runDB db' (cont ())
+runDB db (Done result) = result
