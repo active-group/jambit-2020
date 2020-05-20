@@ -13,8 +13,14 @@ x = 5 + 7
 -- data: *neuer* Typ
 data State =
   Solid | Liquid | Gas
-  deriving (Show, Eq) -- generiert Typklassen-Instanzen für Show, Eq
+  deriving (Show) -- generiert Typklassen-Instanzen für Show, Eq
 
+instance Eq State where
+  (==) Solid Solid = True
+  (==) Liquid Liquid = True
+  (==) Gas Gas = True
+  (==) _ _ = False
+ 
 state1 :: State
 state1 = Solid
 state2 :: State
