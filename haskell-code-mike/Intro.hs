@@ -43,8 +43,13 @@ isCute Schlange = False
 
 -- Tiere auf dem texanischen Highway
 
+data Liveness = Dead | Alive
+
 -- Record-Definition: zusammengesetzte Daten
-data Dillo = Dillo { alive :: Bool, weight :: Integer }
+data Dillo = Dillo { alive :: Liveness, weight :: Integer }
 --           ^^^^^ Konstruktor
 
-dillo1 = Dillo { alive = True, weight = 10} -- Gürteltier, lebendig, 10kg
+dillo1 :: Dillo
+dillo1 = Dillo { alive = Alive, weight = 10} -- Gürteltier, lebendig, 10kg
+dillo2 = Dillo Dead 12 -- Gürteltier, tot, 12 kg
+
