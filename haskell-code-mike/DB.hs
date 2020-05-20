@@ -1,6 +1,7 @@
 module DB where
 
 import qualified Data.Map.Strict as Map
+import Data.Map.Strict (Map)
 
 -- "DSL für Datenbank-Programmierung"
 
@@ -47,4 +48,4 @@ p1 = Put "Mike" 15 (\() ->
      then Done (Just x)
      else Done Nothing)))
 
-runDB :: DB result -> result
+runDB :: Map String Integer -> DB result -> result
