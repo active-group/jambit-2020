@@ -270,3 +270,6 @@ instance Semigroup Bool where
 
 instance Semigroup [a] where
   o x y = x ++ y
+
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  o (x1, x2) (y1, y2) = (o x1 y1, o x2 y2)
