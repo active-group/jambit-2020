@@ -44,7 +44,7 @@ p1 :: DB (Maybe Integer)
 p1 = Put "Mike" 15 (\() ->
      Get "Mike" (\ x ->
      Put "Mike" (x + 1) (\() ->
-     if x > 15
+     if x >= 15
      then Done (Just x)
      else Done Nothing)))
 
