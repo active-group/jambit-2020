@@ -71,6 +71,14 @@ data Animal =
   | Parrot String Integer -- Satz, Gewicht
   deriving Show
 
+{-
+sealed trait Animal
+case class Dillo(alive : Liveness, weight : Integer)
+  extends Animal
+case class Parrot(sentence : String, weight : Integer)
+  extends Animal
+-}
+
 dillo1 :: Animal
 dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10}
 dillo2 :: Animal
