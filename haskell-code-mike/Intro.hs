@@ -191,14 +191,21 @@ natsFrom n = n : natsFrom (n + 1)
 
 -- ist Zahl Vielfacher einer anderen Zahl?
 isMultiple :: Integer -> Integer -> Bool
-isMultiple n d = rem n d == 0
+isMultiple n d = (rem n d) == 0
 
 -- Vielfache einer Zahl aus einer Liste streichen
 strikeMultiples :: Integer -> [Integer] -> [Integer]
+{-
 strikeMultiples n [] = []
 strikeMultiples n (first:rest) =
   if isMultiple first n
   then strikeMultiples n rest
   else first : (strikeMultiples n rest)
+-}
+strikeMultiples n list = filter (\ first -> not (isMultiple first n)) list
 
-
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+-- Annahme: first ist eine Primzahl
+sieve (first:rest) =
+  first : sieve (strikeMultiples first rest) 
