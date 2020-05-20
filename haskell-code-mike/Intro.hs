@@ -113,8 +113,22 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
 -- a, b, c: Typvariablen - klein geschrieben
 curryA :: ((a, b) -> c) -> (a -> (b -> c))
+{-
 curryA =
   \ f ->
     \ a ->
       \ b ->
         f (a, b)
+–}
+curryA =
+  \ f ->
+    \ a ->
+      \ b ->
+        f (a, b)
+
+
+uncurryA :: (a -> (b -> c)) -> ((a, b) -> c)
+uncurryA =
+  \f ->
+    \ (a, b) ->
+      (f a) b
