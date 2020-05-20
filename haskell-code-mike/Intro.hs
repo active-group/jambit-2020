@@ -265,7 +265,8 @@ o3 x y z = x `o` y `o` z
 
 data AddInteger = AddInteger Integer
 --   ^^^ Typ      ^^^ Konstruktor
-
+  deriving Show
+  
 instance Semigroup AddInteger where
   o (AddInteger x) (AddInteger y) = AddInteger (x + y)
 
