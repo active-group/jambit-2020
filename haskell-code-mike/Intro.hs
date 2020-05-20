@@ -209,3 +209,6 @@ sieve [] = []
 -- Annahme: first ist eine Primzahl
 sieve (first:rest) =
   first : sieve (strikeMultiples first rest) 
+
+-- "0 ist das neutrale Element bezüglich +"
+-- "1 ist das neutrale Element bezüglich *"
