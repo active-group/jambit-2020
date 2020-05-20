@@ -30,4 +30,6 @@ waterState = \ temp ->
   then Liquid
   else Gas
 
-
+-- Ein Haustier ...
+data Pet = Hund | Katze | Schlange
+  deriving Show
