@@ -44,10 +44,12 @@ isCute Schlange = False
 -- Tiere auf dem texanischen Highway
 
 data Liveness = Dead | Alive
+  deriving Show
 
 -- Record-Definition: zusammengesetzte Daten
 data Dillo = Dillo { alive :: Liveness, weight :: Integer }
 --           ^^^^^ Konstruktor
+  deriving Show
 
 dillo1 :: Dillo
 dillo1 = Dillo { alive = Alive, weight = 10} -- Gürteltier, lebendig, 10kg
