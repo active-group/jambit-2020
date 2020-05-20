@@ -176,6 +176,9 @@ listSum (x:xs) = x + listSum xs
 cons :: a -> [a] -> [a]
 cons x xs = x : xs
 
-listMap :: 
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) =
+  (f x) : (listMap f xs)
 
 
