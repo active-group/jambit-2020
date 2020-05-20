@@ -198,6 +198,8 @@ listMap f [] = []
 listMap f (x:xs) =
   cons (f x) (listMap f xs)
 
+instance Functor [] where
+  mmap = listMap
 
 -- lazy evalation
 -- nicht-strike Auswertung
@@ -318,6 +320,9 @@ mapMap f (Map []) = Map []
 mapMap f (Map ((key, value):rest)) =
   let Map rest' = mapMap f (Map rest)
   in Map ((key, f value):rest')
+
+instance Functor (Map key) where
+  mmap = mapMap
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f NotThere = NotThere
