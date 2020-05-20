@@ -188,12 +188,16 @@ listSum (x:xs) = x + listSum xs
 cons :: a -> [a] -> [a]
 cons x xs = x : xs
 
+class Functor c where
+  mmap :: (a -> b) -> c a -> c b
+
 type List a = [a] -- Tysynonym
 
 listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x:xs) =
   cons (f x) (listMap f xs)
+
 
 -- lazy evalation
 -- nicht-strike Auswertung
@@ -318,6 +322,9 @@ mapMap f (Map ((key, value):rest)) =
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f NotThere = NotThere
 optionalMap f (There result) = There (f result)
+
+instance Functor Optional where
+  mmap = optionalMap 
 
 -- Eintrag in Map nachschauen
 mapLookup :: Eq key => key -> Map key value -> Optional value
