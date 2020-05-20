@@ -11,5 +11,5 @@ x = 5 + 7
 -- data: *neuer* Typ
 data State =
   Solid | Liquid | Gas
-  deriving (Show, Eq) -- generiert Typklassen-Instanzen für Show, Eq
+--   deriving (Show, Eq) -- generiert Typklassen-Instanzen für Show, Eq
 
