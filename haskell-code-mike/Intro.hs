@@ -144,6 +144,11 @@ flipT = uncurryA . flipA . curryA
 
 -- (.) :: (b -> c) -> (a -> b) -> (a -> c)
 
+-- Idris / Agda: Typen zuerst, Definition wird generiert
+
+data IntList =
+    EmptyIntList
+  | ConsIntList Integer IntList
 
 
 
