@@ -305,6 +305,7 @@ map1 = Map [("Mike", 5), ("Sperber", 15)]
 data Optional result =
     NotThere
   | There result
+  deriving (Show, Eq)
 
 -- Eintrag in Map nachschauen
 mapLookup :: Eq key => key -> Map key value -> Optional value
