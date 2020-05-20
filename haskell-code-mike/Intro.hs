@@ -188,7 +188,9 @@ listSum (x:xs) = x + listSum xs
 cons :: a -> [a] -> [a]
 cons x xs = x : xs
 
-listMap :: (a -> b) -> [a] -> [b]
+type List a = [a] -- Tysynonym
+
+listMap :: (a -> b) -> List a -> List b
 listMap f [] = []
 listMap f (x:xs) =
   cons (f x) (listMap f xs)
@@ -306,6 +308,16 @@ data Optional result =
     NotThere
   | There result
   deriving (Show, Eq)
+
+mapMap :: (a -> b) -> (Map key) a -> (Map key) b
+mapMap f (Map []) = Map []
+mapMap f (Map ((key, value):rest)) =
+  let Map rest' = mapMap f (Map rest)
+  in Map ((key, f value):rest')
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f NotThere = NotThere
+optionalMap f (There result) = There (f result)
 
 -- Eintrag in Map nachschauen
 mapLookup :: Eq key => key -> Map key value -> Optional value
