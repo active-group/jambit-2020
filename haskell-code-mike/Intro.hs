@@ -23,7 +23,7 @@ state3 = Gas
 -- Aggregatzustand von Wasser
 waterState :: Double -> State
 
-waterState temp =
+waterState = \ temp ->
   if temp < 0
   then Solid
   else if temp <= 100
