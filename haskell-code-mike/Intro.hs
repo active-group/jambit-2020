@@ -247,7 +247,11 @@ sieve (first:rest) =
 class Semigroup t where
   -- es gilt das Assoziativgesetz
   -- o (o x y) z = o x (o y z)
+  -- o ist eine überladene Funktion
   o :: t -> t -> t 
 
 instance Semigroup Integer where
   o x y = x + y
+
+instance Semigroup [a] where
+  o x y = x ++ y
