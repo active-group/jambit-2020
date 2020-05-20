@@ -69,6 +69,7 @@ data Animal =
   -- Selektoren sind global
     Dillo { dilloAlive :: Liveness, dilloWeight :: Integer }
   | Parrot String Integer -- Satz, Gewicht
+  deriving Show
 
 dillo1 :: Animal
 dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10}
