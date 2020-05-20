@@ -210,5 +210,32 @@ sieve [] = []
 sieve (first:rest) =
   first : sieve (strikeMultiples first rest) 
 
+-- Mathe: Gruppen, group
+-- Eine Gruppe ist (Mathematik):
+-- - eine Menge M
+-- - eine Operation $: M x M -> M
+-- - ein Gesetz: (x $ y) $ z = x $ (y $ z)
+--   Assoziativgesetz
+-- ...
+
+-- Eine Gruppe ist (Programmierung):
+-- - ein Typ T
+-- - eine Operation o :: T -> T -> T
+-- - o (o x y) z = o x (o y z)
+
+-- "neutral element"
 -- "0 ist das neutrale Element bezüglich +"
 -- "1 ist das neutrale Element bezüglich *"
+
+-- Halbgruppe / semigroup
+-- - Typ T
+-- - Operation o :: T -> T -> T
+-- - Assoziativgesetz : o (o x y) z = o x (o y z)
+
+-- Monoid
+-- Halbgruppe + neutrales Element n
+-- o x n = o n x = x
+-- x `o` n = n `o` x = x -- Infix-Notation
+-- x + 0 = 0 + x = x
+
+class Semigroup
