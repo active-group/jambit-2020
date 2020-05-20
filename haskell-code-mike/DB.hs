@@ -83,6 +83,14 @@ instance Monad DB where
   (>>=) = splice -- "bind"
   return = Done
 
+-- Java: int p1() { ... }
+
+p1'' :: DB Integer -- Seiteffekte: Datenbank-Zugriff, NICHTS SONST
+p1'' = do put "Mike" 15 -- identisch zu p1'
+          x <- get "Mike"
+          put "Mike" (x + 1)
+          return x
+
 -- "dependency injection"
 
 -- Datenbankprogramm ausführen
