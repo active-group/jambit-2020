@@ -73,8 +73,8 @@ splice (Put key value cont) after =
                  splice (cont ()) after)
 splice (Done result) after = after result
 
-instance Monad DB where
-  (>>=) = splice
+-- instance Monad DB where
+--   (>>=) = splice
 
 -- "dependency injection"
 
