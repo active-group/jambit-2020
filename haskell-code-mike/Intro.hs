@@ -179,6 +179,7 @@ cons x xs = x : xs
 listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) =
-  (f x) : (listMap f xs)
+  cons (f x) (listMap f xs)
 
-
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n + 1)
