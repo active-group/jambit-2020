@@ -73,10 +73,10 @@ data Parrot = Parrot String Integer -- Satz, Gewicht
 
 -- algebraischer Datentyp:
 -- gemischte Daten aus zusammengesetzte Daten
-data Animal =
+data Animal weight =
   -- Selektoren sind global
-    Dillo { dilloAlive :: Liveness, dilloWeight :: Integer }
-  | Parrot String Integer -- Satz, Gewicht
+    Dillo { dilloAlive :: Liveness, dilloWeight :: weight }
+  | Parrot String weight -- Satz, Gewicht
   deriving Show
 
 -- Eq-Instanz für Animal:
@@ -91,17 +91,19 @@ case class Parrot(sentence : String, weight : Integer)
   extends Animal
 -}
 
-dillo1 :: Animal
+dillo1 :: Animal Integer
 dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10}
-dillo2 :: Animal
+dillo2 :: Animal Integer
 dillo2 = Dillo Dead 12
-parrot1 :: Animal
+parrot1 :: Animal Integer
 parrot1 = Parrot "Hello!" 1
-parrot2 :: Animal
+parrot2 :: Animal Integer
 parrot2 = Parrot "Goodbye!" 2
 
 -- Tier überfahren
-runOverAnimal :: Animal -> Animal
+-- alt: runOverAnimal :: Animal -> Animal
+-- runOverAnimal verändert das Gewicht nicht
+runOverAnimal :: Animal weight -> Animal weight
 runOverAnimal dillo@(Dillo Dead weight) = dillo -- Alias-Pattern, redundant
 runOverAnimal (Dillo liveness w) = Dillo Dead w
 -- runOverAnimal (Parrot "Good morning!" weight) =
@@ -109,14 +111,22 @@ runOverAnimal (Parrot _ weight) =
   Parrot "" weight
 
 -- Tier füttern
-feedAnimal :: Integer -> (Animal -> Animal)
+-- feedAnimal :: Integer -> (Animal -> Animal)
+feedAnimal :: Num weight => weight -> Animal weight -> Animal weight
 feedAnimal amount (Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal amount (Parrot sentence weight) = Parrot sentence (weight + amount)
 
 -- Tupel
-feedAnimal' :: (Integer, Animal) -> Animal
+-- feedAnimal' :: (Integer, Animal) -> Animal
+feedAnimal' :: Num weight => (weight, Animal weight) -> Animal weight
 feedAnimal' (amount, Dillo liveness weight) = Dillo liveness (weight + amount)
 feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
+
+data Weight =
+  Kg Integer
+
+dillo1' :: Animal Weight
+dillo1' = Dillo Alive (Kg 10)
 
 {-
 (define curry
