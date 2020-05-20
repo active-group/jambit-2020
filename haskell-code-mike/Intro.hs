@@ -124,9 +124,14 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
 
 data Weight =
   Kg Integer
+  deriving Show
+
 
 dillo1' :: Animal Weight
 dillo1' = Dillo Alive (Kg 10)
+
+instance Num Weight where
+  (Kg a) + (Kg b) = Kg (a + b)
 
 {-
 (define curry
