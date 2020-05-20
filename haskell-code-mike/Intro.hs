@@ -79,6 +79,10 @@ data Animal =
   | Parrot String Integer -- Satz, Gewicht
   deriving Show
 
+-- Eq-Instanz für Animal:
+
+
+
 {-
 sealed trait Animal
 case class Dillo(alive : Liveness, weight : Integer)
@@ -266,7 +270,7 @@ o3 x y z = x `o` y `o` z
 data AddInteger = AddInteger Integer
 --   ^^^ Typ      ^^^ Konstruktor
   deriving Show
-  
+
 instance Semigroup AddInteger where
   o (AddInteger x) (AddInteger y) = AddInteger (x + y)
 
