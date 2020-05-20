@@ -51,5 +51,6 @@ data Dillo = Dillo { alive :: Liveness, weight :: Integer }
 
 dillo1 :: Dillo
 dillo1 = Dillo { alive = Alive, weight = 10} -- Gürteltier, lebendig, 10kg
+dillo2 :: Dillo
 dillo2 = Dillo Dead 12 -- Gürteltier, tot, 12 kg
 
