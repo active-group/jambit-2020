@@ -181,5 +181,7 @@ listMap f [] = []
 listMap f (x:xs) =
   cons (f x) (listMap f xs)
 
+-- lazy evalation
+-- Ausdrücke werden nur soweit ausgwertet, wie nötig
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n + 1)
