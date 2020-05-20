@@ -285,3 +285,19 @@ instance Semigroup [a] where
 
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
   o (x1, x2) (y1, y2) = (o x1 y1, o x2 y2)
+
+class Semigroup t => Monoid t where
+  -- o x t = o t x = x
+  neutral :: t
+
+instance Monoid AddInteger where
+  neutral = AddInteger 0
+
+instance Monoid [a] where
+  neutral = []
+
+-- "Key-Value Store"
+data Map key value = Map [(key, value)]
+
+map1 :: Map String Integer
+map1 = Map [("Mike", 5), ("Sperber", 15)]
