@@ -82,5 +82,5 @@ parrot2 = Parrot "Goodbye!" 2
 -- Tier überfahren
 runOverAnimal :: Animal -> Animal
 runOverAnimal (Dillo liveness w) = Dillo Dead w
-runOverAnimal (Parrot _ weight) =
+runOverAnimal (Parrot "Good morning!" weight) =
   Parrot "" weight
