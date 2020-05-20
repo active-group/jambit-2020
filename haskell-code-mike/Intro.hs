@@ -40,3 +40,11 @@ isCute :: Pet -> Bool
 isCute Hund = True
 isCute Katze = True
 isCute Schlange = False
+
+-- Tiere auf dem texanischen Highway
+
+-- Record-Definition: zusammengesetzte Daten
+data Dillo = Dillo { alive :: Bool, weight :: Integer }
+--           ^^^^^ Konstruktor
+
+dillo1 = Dillo { alive = True, weight = 10} -- Gürteltier, lebendig, 10kg
