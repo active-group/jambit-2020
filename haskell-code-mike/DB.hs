@@ -110,7 +110,10 @@ divideBy :: Integer -> Integer -> Either ErrorMessage Integer
 divideBy a 0 = Left "division by zero"
 divideBy a n = Right (quot a n)
 
-
+divideProgram a b =
+    do x <- divideBy a b 
+       y <- divideBy b a
+       return (x, y)
 
 -- Haskell-Programm
 -- main :: IO ()
