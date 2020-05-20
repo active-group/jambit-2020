@@ -1,6 +1,7 @@
 module Intro where
 
-x = 5
+x :: Integer
+x = 5 + 7
 
 data State =
   Solid | Liquid | Gas
