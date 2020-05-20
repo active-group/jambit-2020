@@ -262,8 +262,10 @@ class Semigroup t where
 o3 :: Semigroup t => t -> t -> t -> t
 o3 x y z = x `o` y `o` z
 
-instance Semigroup Integer where
-  o x y = x + y
+data AddInteger = AddInteger Integer
+
+instance Semigroup AddInteger where
+  o (AddInteger x) (AddInteger y) = AddInteger (x + y)
 
 instance Semigroup Integer where
   o x y = x * y
