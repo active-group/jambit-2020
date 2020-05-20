@@ -104,6 +104,11 @@ feedAnimal' (amount, Parrot sentence weight) = Parrot sentence (weight + amount)
     (lambda (a)
       (lambda (b)
         (f a b)))))
+
+(define uncurry
+  (lambda (f)
+    (lambda (a b)
+      ((f a) b))))
 -}
 
 -- a, b, c: Typvariablen - klein geschrieben
