@@ -250,6 +250,12 @@ class Semigroup t where
   -- o ist eine überladene Funktion
   o :: t -> t -> t 
 
+-- vor dem => : constraints
+-- o :: Semigroup t => t -> t -> t
+
+o3 :: Semigroup t => t -> t -> t -> t
+o3 x y z = x `o` y `o` z
+
 instance Semigroup Integer where
   o x y = x + y
 
