@@ -46,6 +46,7 @@ isCute Schlange = False
 data Liveness = Dead | Alive
   deriving Show
 
+{-
 -- Record-Definition: zusammengesetzte Daten
 data Dillo = Dillo { alive :: Liveness, weight :: Integer }
 --           ^^^^^ Konstruktor
@@ -57,3 +58,23 @@ dillo2 :: Dillo
 dillo2 = Dillo Dead 12 -- Gürteltier, tot, 12 kg
 
 data Parrot = Parrot String Integer -- Satz, Gewicht
+
+-}
+-- Geht nicht:
+-- data Animal = Dillo | Parrot
+
+-- algebraischer Datentyp:
+-- gemischte Daten aus zusammengesetzte Daten
+data Animal =
+  -- Selektoren sind global
+    Dillo { dilloAlive :: Liveness, dilloWeight :: Integer }
+  | Parrot String Integer -- Satz, Gewicht
+
+dillo1 :: Animal
+dillo1 = Dillo { dilloAlive = Alive, dilloWeight = 10}
+dillo2 :: Animal
+dillo2 = Dillo Dead 12
+parrot1 :: Animal
+parrot1 = Parrot "Hello!" 1
+parrot2 :: Animal
+parrot2 = Parrot "Goodbye!" 2
